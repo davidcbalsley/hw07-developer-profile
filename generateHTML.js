@@ -170,5 +170,16 @@ function generateHTML(data) {
             zoom: .75; 
           } 
          }
-      </style>`
+      </style>
+      <body>
+        <h2>Hi!</h2>
+        <h2>My name is ${data.name}</h2>
+      </body>
+    </html>`
+
+        }
+
+        module.exports = {
+          colors,
+          generateHTML
         }
