@@ -33,12 +33,18 @@ function init() {
     inquirer
         .prompt(questions)
         .then(function(inquirerResponse) {
+            // Get information about the user
            
             // Create the query string -- incpororate the username entered by the user
-            const queryUrl = `https://api.github.com/users/${inquirerResponse.username}`;
+            const userQueryUrl = `https://api.github.com/users/${inquirerResponse.username}`;
 
-            axios.get(queryUrl).then(function(axiosResponse) {
+            return axios.get(userQueryUrl);
+
+            /*
+            axios.get(queryUrl).then(function(axiosUserResponse) {
                 // console.log(axiosResponse);  // debug
+
+
 
                 // Assign the color for the resume so that it matches the favorite color chosen by the user
                 axiosResponse.data.color = inquirerResponse.favoriteColor;
@@ -52,6 +58,32 @@ function init() {
                 writeToFile("resume.pdf", html);
             });            
         });
+        */
+        })
+        .then(function(axiosUserResponse) {
+            // Get information about the user's repos, so that we can calculate the user's number of stars
+
+            // Create the query string -- incorporate the username entered by the user
+            const userReposUrl = `https://api.github.com/users/${axiosUserResponse.data.login}/starred`;
+
+            axios.get(userReposUrl).then(function(axiosRepoResponse) {
+                
+                let totalStarCount = 0;     // The total number of stars for the user's repos
+
+                // Get the count of stars for each repo
+                const repoStarCounts = axiosRepoResponse.data.map(function(repo) {
+                    return repo.stargazers_count;
+                });
+
+                // Add up the total count of stars for all of the repos
+                for (var i = 0; i < repoStarCounts.length; i++) {
+                    totalStarCount += parseInt(repoStarCounts[i]);
+                }
+
+            });
+
+        });
+
 }
 
 init();
