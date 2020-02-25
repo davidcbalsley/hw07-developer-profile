@@ -3,6 +3,8 @@ const generateHTML = require("./generateHTML");
 const inquirer = require("inquirer");
 const pdf = require("html-pdf");
 
+let favoriteColor = "";
+
 // List of questions to ask the user
 const questions = [
     {
@@ -38,27 +40,9 @@ function init() {
             // Create the query string -- incpororate the username entered by the user
             const userQueryUrl = `https://api.github.com/users/${inquirerResponse.username}`;
 
+            favoriteColor = inquirerResponse.favoriteColor;
+
             return axios.get(userQueryUrl);
-
-            /*
-            axios.get(queryUrl).then(function(axiosUserResponse) {
-                // console.log(axiosResponse);  // debug
-
-
-
-                // Assign the color for the resume so that it matches the favorite color chosen by the user
-                axiosResponse.data.color = inquirerResponse.favoriteColor;
-
-                // const html = generateHTML.generateHTML(data);
-                const html = generateHTML.generateHTML(axiosResponse.data);
-
-                // console.log(html);  // debug          
-
-                // Create a PDF
-                writeToFile("resume.pdf", html);
-            });            
-        });
-        */
         })
         .then(function(axiosUserResponse) {
             // Get information about the user's repos, so that we can calculate the user's number of stars
@@ -80,8 +64,19 @@ function init() {
                     totalStarCount += parseInt(repoStarCounts[i]);
                 }
 
-            });
+                // Assign the color for the resume so that it matches the favorite color chosen by the user
+                axiosUserResponse.data.color = favoriteColor;
 
+                // Add the total number of stars to axiosUserResponse.data
+                axiosUserResponse.data.starCount = totalStarCount;
+
+                // Create the HTML
+                const html = generateHTML.generateHTML(axiosUserResponse.data);       
+
+                // Create a PDF
+                writeToFile("resume.pdf", html);
+
+            });
         });
 
 }
@@ -89,7 +84,6 @@ function init() {
 init();
 
 // Next steps:
-// - Get count of GitHub stars
 // - Fix formatting to HTML
 // -- Fix spacing between links
 // - Switch out library for generating PDF?
