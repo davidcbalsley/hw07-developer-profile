@@ -5,16 +5,21 @@ This repository houses the files that implement a developer profile generator.
 
 ### Purpose
 
-This website serves as an easy means to track appointments in a given day. It allows a user to record their important events, and also provides a graphical representation of the current time, making it that much simpler to quickly identify the next top priority on one's agenda.
+This application provides a convenient means to generate a profile for a developer based on their GitHub account. Relying on only the developer's username, it generates a PDF that lists some general information about the programmer, including their location and bio, along with statistics about their GitHub repositories.
 
 ### Functionality
 
-To record an appointment, find the row for the corresponding time, then click the large text area in the middle. Type a description of your upcoming event. When you're ready to save, click the lock button to the right. The page will store your description in local storage, ensuring that your notes will persist, even if you close and re-open your browser window.
+This application runs in node. To begin, from the command line, enter 'node index.js'.
 
-In addition, as you refresh the page throughout the day, the time slots will change in color to reflect the current time. Times in the past will appear in grey; in the present, in red; and in the future, in green.
+At the first prompt, enter the GitHub username for the developer whose profile you'd like to generate. At the next prompt, choose your favorite color -- the application will use this color to style the resulting document.
+
+The application queries GitHub to get information about the specified user and their repos. It collects this information and publishes it in a file named 'resume.pdf'.
 
 ### Concepts and techniques
-* Using the Moment.js library to format dates
-* Using indexOf
+* Axios
+* Chaining
+* Modules
+* Node
+* String literals
 
-https://davidcbalsley.github.io/hw05-day-planner/
+https://davidcbalsley.github.io/hw07-developer-profile/
