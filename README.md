@@ -1,7 +1,7 @@
 # Developer Profile Generator
 This repository houses the files that implement a developer profile generator.
 
-![Screenshot for day planner](src/images/scheduler-screenshot.png)
+![Screenshot for developer profile generator](src/images/profile-screenshot.png)
 
 ### Purpose
 
