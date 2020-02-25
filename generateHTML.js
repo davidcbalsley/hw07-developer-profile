@@ -171,11 +171,78 @@ function generateHTML(data) {
           } 
          }
       </style>
-      <body>
-        <h2>Hi!</h2>
-        <h2>My name is ${data.name}</h2>
-      </body>
-    </html>`
+    </head>
+    <body>
+        <div class="photo-header">
+            <img class="photo-header" src="https://avatars1.githubusercontent.com/u/56838866?v=4">
+            <h2>Hi!</h2>
+            <h2>My name is ${data.name}</h2>
+            <span>
+                <!-- Link to Google map location -->
+                <a target="_blank" href="https://www.google.com/maps/place/Chicago,%IL"><i class="fas fa-location-arrow"></i>${data.location}</a>
+                <!-- Note: Need to create URL-friendly version of location to pass into google maps link-->
+                <!-- Need tp put placeholder for place in text for link -->
+
+                <!-- Link to GitHub profile -->
+                <a target="_blank" href="${data.html_url}"><i class="fab fa-github-alt"></i>GitHub</a>
+                <!-- Note: Need to change href to use data.html_url -->
+
+                <!-- Link to blog -->
+                <a target="_blank" href="${data.blog}"><i class="fas fa-rss-square"></i>Blog</a>
+            </span>
+        </div>
+
+        <!-- Bio -->
+        <h3>I am student in a Northwestern Coding Boot Camp.</h3>
+        <!-- Note: Need to change this to use data.bio -->
+
+        <!-- Cards for repositories, followers, GitHub stars, and following -->
+        <div class="container">
+
+            <!-- First row -->
+            <div class="row">
+
+                <!-- First card in first row-->
+                <div class="col">
+                    <div class="card">
+                        <h2>Public Repositories</h2>
+                        <h4>${data.public_repos}</h4>
+                    </div>
+                </div>
+
+                 <!-- Second card in first row-->
+                 <div class="col">
+                    <div class="card">
+                        <h2>Followers</h2>
+                        <h4>${data.followers}</h4>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Second row -->
+            <div class="row">
+
+                <!-- First card in second row-->
+                <div class="col">
+                    <div class="card">
+                        <h2>GitHub Stars</h2>
+                        <h4>??</h4>
+                        <!-- Note: not sure how to get this -->
+                    </div>
+                </div>
+
+                 <!-- Second card in second row-->
+                 <div class="col">
+                    <div class="card">
+                        <h2>Following</h2>
+                        <h4>${data.following}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>`
 
         }
 
