@@ -18,17 +18,6 @@ const questions = [
     }  
 ];
 
-// 
-const data = {
-    color: "red",
-    name: "David Balsley",
-    html_url: "",
-    blog: "",
-    publid_repos: 16,
-    followers: 0,
-    following: 1
-}
-
 // Create a PDF file from HTML
 function writeToFile(fileName, data) {
     pdf.create(data).toFile(fileName, function(err, res) {
@@ -40,33 +29,27 @@ function writeToFile(fileName, data) {
 
 
 function init() {
-    // Get the names of the available colors from generteHTML.js
-    // for (color )
-
     // Prompt the user with a series of questions
     inquirer
         .prompt(questions)
-        .then(function(response) {
-            // console.log(response); // debug
-
-            const queryUrl = `https://api.github.com/users/${response.username}`;
+        .then(function(inquirerResponse) {
+           
+            // Create the query string -- incpororate the username entered by the user
+            const queryUrl = `https://api.github.com/users/${inquirerResponse.username}`;
 
             axios.get(queryUrl).then(function(axiosResponse) {
                 // console.log(axiosResponse);  // debug
 
-                // Assign name in data object
-                // data.name = "David Balsley";
-                // data.name = axiosResponse. ...  //
-
-                // data.color = 
+                // Assign the color for the resume so that it matches the favorite color chosen by the user
+                axiosResponse.data.color = inquirerResponse.favoriteColor;
 
                 // const html = generateHTML.generateHTML(data);
-                const html = generateHTML.generateHTML(data);
-                // console.log(html);             
+                const html = generateHTML.generateHTML(axiosResponse.data);
+
+                // console.log(html);  // debug          
 
                 // Create a PDF
                 writeToFile("resume.pdf", html);
-                // return writeToFileAsync("resume.pdf", html);   
             });            
         });
 }
@@ -74,7 +57,7 @@ function init() {
 init();
 
 // Next steps:
-// - Add formatting to HTML
+// - Fixformatting to HTML
 // - Get colors from colors, using for ... in
 // - Get data from axiosResponse, use it to populate document
 // - Move pdf.create(html) into writeToFile, promisify it, avoid callback hell
