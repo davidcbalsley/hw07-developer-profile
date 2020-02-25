@@ -2,7 +2,6 @@ const axios = require("axios");
 const generateHTML = require("./generateHTML");
 const inquirer = require("inquirer");
 const pdf = require("html-pdf");
-// const util = require("util");
 
 // List of questions to ask the user
 const questions = [
@@ -10,8 +9,13 @@ const questions = [
         type: "input",
         message: "What is your GitHub user name?",
         name: "username"
-    }
-  
+    },
+    {
+        type: "list",
+        message: "What is your favorite color?",
+        name: "favoriteColor",
+        choices: Object.keys(generateHTML.colors)
+    }  
 ];
 
 // 
@@ -36,6 +40,9 @@ function writeToFile(fileName, data) {
 
 
 function init() {
+    // Get the names of the available colors from generteHTML.js
+    // for (color )
+
     // Prompt the user with a series of questions
     inquirer
         .prompt(questions)
@@ -72,5 +79,4 @@ init();
 // - Get data from axiosResponse, use it to populate document
 // - Move pdf.create(html) into writeToFile, promisify it, avoid callback hell
 
-// - At some point, restore call to axios
 
