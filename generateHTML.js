@@ -174,18 +174,17 @@ function generateHTML(data) {
     </head>
     <body>
         <div class="photo-header">
-            <img class="photo-header" src="https://avatars1.githubusercontent.com/u/56838866?v=4">
+            <!--  Picture of me -->
+            <img class="photo-header" src="${data.avatar_url}">
+
             <h2>Hi!</h2>
             <h2>My name is ${data.name}</h2>
             <span>
                 <!-- Link to Google map location -->
-                <a target="_blank" href="https://www.google.com/maps/place/Chicago,%IL"><i class="fas fa-location-arrow"></i>${data.location}</a>
-                <!-- Note: Need to create URL-friendly version of location to pass into google maps link-->
-                <!-- Need tp put placeholder for place in text for link -->
+                <a target="_blank" href="https://www.google.com/maps/place/${data.location}"><i class="fas fa-location-arrow"></i>${data.location}</a>
 
                 <!-- Link to GitHub profile -->
                 <a target="_blank" href="${data.html_url}"><i class="fab fa-github-alt"></i>GitHub</a>
-                <!-- Note: Need to change href to use data.html_url -->
 
                 <!-- Link to blog -->
                 <a target="_blank" href="${data.blog}"><i class="fas fa-rss-square"></i>Blog</a>

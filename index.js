@@ -57,9 +57,11 @@ function init() {
 init();
 
 // Next steps:
-// - Fixformatting to HTML
-// - Get colors from colors, using for ... in
-// - Get data from axiosResponse, use it to populate document
-// - Move pdf.create(html) into writeToFile, promisify it, avoid callback hell
+// - Get count of GitHub stars
+// - Fix formatting to HTML
+// -- Fix spacing between links
+// - Switch out library for generating PDF?
+// - Avoid callback hell
+// - Handle case where GitHub username not found
 
 
