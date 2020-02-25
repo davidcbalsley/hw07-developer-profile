@@ -22,4 +22,4 @@ The application queries GitHub to get information about the specified user and t
 * Node
 * String literals
 
-https://davidcbalsley.github.io/hw07-developer-profile/
+https://github.com/davidcbalsley/hw07-developer-profile
